@@ -31,29 +31,28 @@ export default class Home extends Vue {
   private API: string = 'https://script.google.com/macros/s/AKfycbx0qeWL2O9WQxHzj6t24FYUmJ87qg6S83dx4lRPCFpQ_XcpBak/exec';
   private favCount: number = 0;
   private heartColor: string = '';
-
   private message: string = '';
 
-  mounted() { this.getFav(); }
+  public mounted() { this.getFav(); }
 
-  pressRay() { this.getMessage('レイ'); }
+  public pressRay() { this.getMessage('レイ'); }
 
-  pressRio() { this.getMessage('リオ'); }
+  public pressRio() { this.getMessage('リオ'); }
 
-  favorite() {
+  public favorite() {
     this.setFav();
   }
 
-  tweet() {
+  public tweet() {
     const EUC = encodeURIComponent;
     const LINK = window.location.href;
     const message = this.message === '' ? 'かわいそうなおめシスはかわいい' : this.message;
-    const hashtag = "omesis_kawaii"
-    const URL = `https://twitter.com/intent/tweet?text=${EUC(message)}&hashtags=${EUC(hashtag)}&url=${LINK}`
+    const hashtag = 'omesis_kawaii';
+    const URL = `https://twitter.com/intent/tweet?text=${EUC(message)}&hashtags=${EUC(hashtag)}&url=${LINK}`;
     if (navigator.userAgent.indexOf('iPhone') > 0 || navigator.userAgent.indexOf('iPad') > 0 || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
-        location.href = URL
-    }else{
-        window.open(URL, "_blank","top=50,left=50,width=500,height=500,scrollbars=1,location=0,menubar=0,toolbar=0,status=1,directories=0,resizable=1");
+        location.href = URL;
+    } else {
+        window.open(URL, '_blank', 'top=50,left=50,width=500,height=500,scrollbars=1,location=0,menubar=0,toolbar=0,status=1,directories=0,resizable=1');
     }
   }
 
@@ -61,7 +60,7 @@ export default class Home extends Vue {
     axios.get(this.API)
       .then(response => {
         this.favCount = response.data.fav;
-        this.heartColor = this.favCount&1 ? 'pink' : 'blue';
+        this.heartColor = this.favCount & 1 ? 'pink' : 'blue';
       })
   }
 
@@ -69,7 +68,7 @@ export default class Home extends Vue {
     axios.post(this.API)
       .then(response => {
         this.favCount = response.data.fav;
-        this.heartColor = this.favCount&1 ? 'pink' : 'blue';
+        this.heartColor = this.favCount & 1 ? 'pink' : 'blue';
       })
   }
   
